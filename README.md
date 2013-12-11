@@ -1,4 +1,4 @@
-# Capybara::Ui
+# Capybara::UI
 
 TODO: Write a gem description
 

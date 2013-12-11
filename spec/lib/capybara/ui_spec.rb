@@ -1,5 +1,5 @@
 require "spec_helper"
 
-describe Capybara::Ui do
+describe Capybara::UI do
   it "works!"
 end

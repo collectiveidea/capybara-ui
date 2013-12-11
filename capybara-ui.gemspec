@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
 
   spec.author      = "Collective Idea"
   spec.email       = "info@collectiveidea.com"
-  spec.description = "Capybara::Ui gives you page objects to help make your acceptance tests readable and resilient."
+  spec.description = "Capybara::UI gives you page objects to help make your acceptance tests readable and resilient."
   spec.summary     = "Page objects for readable, resilient acceptance tests"
   spec.homepage    = "https://github.com/collectiveidea/capybara-ui"
   spec.license     = "MIT"
