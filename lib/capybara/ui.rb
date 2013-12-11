@@ -1,5 +1,4 @@
 module Capybara
-  module UI
-    # Your code goes here...
+  class UI
   end
 end
