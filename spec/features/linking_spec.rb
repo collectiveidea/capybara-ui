@@ -26,4 +26,15 @@ feature "Linking" do
       page.ui.class
     }.from(BarPage).to(FooPage)
   end
+
+  scenario "UI is reloaded independently per session" do
+    using_session :other do
+      visit "foo.html"
+      page.ui.click_bar
+
+      expect(page.ui.class).to eq(BarPage)
+    end
+
+    expect(page.ui.class).to eq(FooPage)
+  end
 end
