@@ -1,6 +1,36 @@
 require "capybara"
+require "capybara/ui/dsl"
+require "capybara/ui/drivers/rack_test"
 
 module Capybara
   class UI
+    class Error < StandardError; end
+    class NoMatch < Error; end
+
+    include Capybara::DSL
+
+    attr_reader :page
+
+    def self.inherited(subclass)
+      Capybara::UI.subclasses << subclass
+    end
+
+    def self.subclasses
+      @subclasses ||= []
+    end
+
+    def self.for_page(page)
+      subclass_for_page(page).new(page)
+    end
+
+    def self.subclass_for_page(page)
+      subclasses.detect { |s| s.matches?(page) } || (raise NoMatch)
+    end
+
+    def initialize(page)
+      @page = page
+    end
   end
 end
+
+Capybara::Session.send(:include, Capybara::UI::DSL)
