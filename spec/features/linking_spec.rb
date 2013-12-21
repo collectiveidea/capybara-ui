@@ -2,7 +2,7 @@ require "spec_helper"
 
 feature "Linking" do
   background do
-    visit "foo.html"
+    visit "/foo.html"
   end
 
   scenario "UI is loaded before interacting with a page" do
@@ -29,7 +29,7 @@ feature "Linking" do
 
   scenario "UI is reloaded independently per session" do
     using_session :other do
-      visit "foo.html"
+      visit "/foo.html"
       page.ui.click_bar
 
       expect(page.ui.class).to eq(BarPage)

@@ -1,3 +1,5 @@
+ENV["DRIVER"] ||= "rack_test"
+
 require "capybara/ui"
 
 require "bundler"

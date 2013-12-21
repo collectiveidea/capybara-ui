@@ -1,6 +1,7 @@
 require "capybara"
 require "capybara/ui/dsl"
 require "capybara/ui/drivers/rack_test"
+require "capybara/ui/drivers/poltergeist"
 
 module Capybara
   class UI
