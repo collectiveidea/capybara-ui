@@ -37,4 +37,14 @@ feature "Linking" do
 
     expect(page.ui.class).to eq(FooPage)
   end
+
+  scenario "UI is reloaded when the session is reset" do
+    page.reset!
+
+    expect { page.ui }.to raise_error(Capybara::UI::NoMatch)
+
+    visit "/foo.html"
+
+    expect(page.ui.class).to eq(FooPage)
+  end
 end
