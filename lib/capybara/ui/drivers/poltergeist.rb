@@ -11,7 +11,8 @@ if defined?(Capybara::Poltergeist::Browser) && defined?(Capybara::Poltergeist::C
         class Listener
           RELOAD_PATTERN = /\Acapybara-ui reload\s*\z/
 
-          def initialize(logger)
+          def initialize(client, logger = nil)
+            @client = client
             @logger = logger
           end
 
@@ -21,12 +22,21 @@ if defined?(Capybara::Poltergeist::Browser) && defined?(Capybara::Poltergeist::C
 
           private
 
+          def session
+            return @session if defined? @session
+            @session = sessions.detect { |s| s.driver.client == @client }
+          end
+
+          def sessions
+            Capybara.send(:session_pool).values
+          end
+
           def reload?(data)
             data =~ RELOAD_PATTERN
           end
 
           def reload
-            Capybara.current_session.reload_ui
+            session.reload_ui if session
           end
 
           def log(data)
@@ -48,12 +58,12 @@ if defined?(Capybara::Poltergeist::Browser) && defined?(Capybara::Poltergeist::C
   end
 
   Capybara::Poltergeist::Client.class_eval do
-    def initialize_with_capybara_ui_listener(*args)
-      initialize_without_capybara_ui_listener(*args)
-      @phantomjs_logger = Capybara::UI::Poltergeist::Listener.new(@phantomjs_logger)
+    def initialize_with_listener(*args)
+      initialize_without_listener(*args)
+      @phantomjs_logger = Capybara::UI::Poltergeist::Listener.new(self, @phantomjs_logger)
     end
 
-    alias_method :initialize_without_capybara_ui_listener, :initialize
-    alias_method :initialize, :initialize_with_capybara_ui_listener
+    alias_method :initialize_without_listener, :initialize
+    alias_method :initialize, :initialize_with_listener
   end
 end
