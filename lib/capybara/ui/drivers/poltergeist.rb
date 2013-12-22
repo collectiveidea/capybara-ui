@@ -11,6 +11,8 @@ if defined?(Capybara::Poltergeist::Browser) && defined?(Capybara::Poltergeist::C
         class Listener
           RELOAD_PATTERN = /\Acapybara-ui reload\s*\z/
 
+          attr_reader :client, :logger, :session
+
           def initialize(client, logger = nil)
             @client = client
             @logger = logger
@@ -22,15 +24,6 @@ if defined?(Capybara::Poltergeist::Browser) && defined?(Capybara::Poltergeist::C
 
           private
 
-          def session
-            return @session if defined? @session
-            @session = sessions.detect { |s| s.driver.client == @client }
-          end
-
-          def sessions
-            Capybara.send(:session_pool).values
-          end
-
           def reload?(data)
             data =~ RELOAD_PATTERN
           end
@@ -39,8 +32,13 @@ if defined?(Capybara::Poltergeist::Browser) && defined?(Capybara::Poltergeist::C
             session.reload_ui if session
           end
 
+          def session
+            return @session if defined? @session
+            @session = Capybara::UI.find_session { |s| s.driver.client == client }
+          end
+
           def log(data)
-            @logger.write(data) if @logger
+            logger.write(data) if logger
           end
         end
       end

@@ -28,6 +28,14 @@ module Capybara
       subclasses.detect { |s| s.matches?(page) } || (raise NoMatch)
     end
 
+    def self.find_session(&block)
+      sessions.find(&block)
+    end
+
+    def self.sessions
+      Capybara.send(:session_pool).values
+    end
+
     def initialize(page)
       @page = page
     end
