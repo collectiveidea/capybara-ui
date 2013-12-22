@@ -19,6 +19,8 @@ module Capybara
         capybara_ui_session.reload_ui if capybara_ui_session
       end
 
+      private
+
       def capybara_ui_session
         return @capybara_ui_session if defined? @capybara_ui_session
         @capybara_ui_session = find_capybara_ui_session

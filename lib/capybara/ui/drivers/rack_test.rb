@@ -4,7 +4,7 @@ Capybara::RackTest::Browser.class_eval do
   include Capybara::UI::Reload
 
   has_capybara_ui_session do |browser, session|
-    session.driver.browser == browser
+    session.driver.instance_variable_get(:@browser) == browser
   end
 
   def reset_cache_with_capybara_ui_reload!
