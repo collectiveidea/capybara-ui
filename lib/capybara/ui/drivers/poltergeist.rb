@@ -53,12 +53,12 @@ if defined?(Capybara::Poltergeist::Browser) && defined?(Capybara::Poltergeist::C
   end
 
   Capybara::Poltergeist::Client.class_eval do
-    def initialize_with_listener(*args)
-      initialize_without_listener(*args)
+    def initialize_with_capybara_ui_listener(*args)
+      initialize_without_capybara_ui_listener(*args)
       @phantomjs_logger = Capybara::UI::Poltergeist::Listener.new(self, @phantomjs_logger)
     end
 
-    alias_method :initialize_without_listener, :initialize
-    alias_method :initialize, :initialize_with_listener
+    alias_method :initialize_without_capybara_ui_listener, :initialize
+    alias_method :initialize, :initialize_with_capybara_ui_listener
   end
 end
