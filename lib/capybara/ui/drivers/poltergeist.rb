@@ -17,7 +17,7 @@ if defined?(Capybara::Poltergeist::Browser) && defined?(Capybara::Poltergeist::C
             session.driver.instance_variable_get(:@client) == listener.client
           end
 
-          attr_reader :client, :logger, :session
+          attr_reader :client, :logger
 
           def initialize(client, logger = nil)
             @client = client
