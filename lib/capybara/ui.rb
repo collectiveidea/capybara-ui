@@ -1,4 +1,5 @@
 require "capybara"
+require "capybara/ui/element"
 require "capybara/ui/session"
 require "capybara/ui/dsl"
 require "capybara/ui/reload"
@@ -44,6 +45,36 @@ module Capybara
 
     def self.sessions
       Capybara.send(:session_pool).values
+    end
+
+    def self.has_many(name, options = {})
+      options[:type] = :many
+
+      association(name, options)
+
+      define_method(name) do
+        page.all(options[:class].selector).map { |node| options[:class].new(node) }
+      end
+    end
+
+    def self.has_one(name, options = {})
+      options[:type] = :one
+
+      association(name, options)
+
+      define_method(name) do
+        options[:class].new(page.find(options[:class].selector))
+      end
+    end
+
+    def self.association(name, options = {})
+      options[:class] ||= const_get(options.delete(:class_name))
+
+      associations[name] = options
+    end
+
+    def self.associations
+      @associations ||= {}
     end
 
     def initialize(page)

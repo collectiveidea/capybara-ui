@@ -1,11 +1,9 @@
 require "spec_helper"
 
 feature "Capybara" do
-  background do
-    visit "/foo.html"
-  end
-
   scenario "UI is loaded before interacting with a page" do
+    visit "/foo.html"
+
     expect {
       ui.click_bar
     }.to change {
@@ -14,6 +12,8 @@ feature "Capybara" do
   end
 
   scenario "UI is automatically reloaded when following links" do
+    visit "/foo.html"
+
     expect {
       ui.click_bar
     }.to change {
@@ -28,6 +28,8 @@ feature "Capybara" do
   end
 
   scenario "UI is reloaded independently per session" do
+    visit "/foo.html"
+
     using_session :other do
       visit "/foo.html"
       ui.click_bar
@@ -39,6 +41,8 @@ feature "Capybara" do
   end
 
   scenario "UI is reloaded when the session is reset" do
+    visit "/foo.html"
+
     page.reset!
 
     expect { ui }.to raise_error(Capybara::UI::NoMatch)
@@ -46,5 +50,27 @@ feature "Capybara" do
     visit "/foo.html"
 
     expect(ui.class).to eq(FooPage)
+  end
+
+  scenario "UI can load plural associations" do
+    visit "/people.html"
+
+    ui_people = ui.people
+    expect(ui_people).to have(4).people
+    expect(ui_people[0].name).to eq("Daniel Morrison")
+    expect(ui_people[1].name).to eq("Brian Ryckbost")
+    expect(ui_people[2].name).to eq("Chris Gaffney")
+    expect(ui_people[3].name).to eq("Steve Richert")
+  end
+
+  scenario "UI can load singular associations" do
+    visit "/login.html"
+
+    ui_form = ui.form
+    ui_form.email = "foo@bar.com"
+    ui_form.password = "secret"
+
+    expect(ui_form.email).to eq("foo@bar.com")
+    expect(ui_form.password).to eq("secret")
   end
 end
