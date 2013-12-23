@@ -1,5 +1,11 @@
 # Capybara::UI
 
+[![Gem Version](https://badge.fury.io/rb/capybara-ui.png)](http://badge.fury.io/rb/capybara-ui)
+[![Build Status](https://travis-ci.org/collectiveidea/capybara-ui.png?branch=master)](https://travis-ci.org/collectiveidea/capybara-ui)
+[![Code Climate](https://codeclimate.com/github/collectiveidea/capybara-ui.png)](https://codeclimate.com/github/collectiveidea/capybara-ui)
+[![Coverage Status](https://coveralls.io/repos/collectiveidea/capybara-ui/badge.png)](https://coveralls.io/r/collectiveidea/capybara-ui)
+[![Dependency Status](https://gemnasium.com/collectiveidea/capybara-ui.png)](https://gemnasium.com/collectiveidea/capybara-ui)
+
 Capybara::UI gives you page objects to help make your acceptance tests readable and resilient.
 
 ## Page Objects
