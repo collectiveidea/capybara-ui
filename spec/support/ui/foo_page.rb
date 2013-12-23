@@ -1,7 +1,5 @@
 class FooPage < Capybara::UI
-  def self.matches?(page)
-    page.current_path =~ /foo/
-  end
+  path /foo/
 
   def click_bar
     click_link "Bar"

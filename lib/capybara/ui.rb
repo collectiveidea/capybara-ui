@@ -18,6 +18,14 @@ module Capybara
       Capybara::UI.subclasses << subclass
     end
 
+    def self.path(path)
+      @path = path
+    end
+
+    def self.matches?(page)
+      page.current_path =~ @path
+    end
+
     def self.subclasses
       @subclasses ||= []
     end
