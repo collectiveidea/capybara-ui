@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "Linking" do
+feature "Capybara" do
   background do
     visit "/foo.html"
   end
