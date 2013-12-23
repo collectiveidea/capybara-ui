@@ -23,7 +23,7 @@ module Capybara
     end
 
     def self.matches?(page)
-      page.current_path =~ @path
+      @path === page.current_path
     end
 
     def self.subclasses
