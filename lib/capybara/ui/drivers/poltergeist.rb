@@ -2,9 +2,7 @@ begin
   require "capybara/poltergeist/browser"
   require "capybara/poltergeist/client"
 rescue LoadError
-end
-
-if defined?(Capybara::Poltergeist::Browser) && defined?(Capybara::Poltergeist::Client)
+else
   module Capybara
     class UI
       module Poltergeist
