@@ -1,6 +1,6 @@
 module Capybara
   class UI
-    module DSL
+    module Session
       def ui
         @ui ||= Capybara::UI.for_page(self)
       end
@@ -11,3 +11,5 @@ module Capybara
     end
   end
 end
+
+Capybara::Session.send(:include, Capybara::UI::Session)

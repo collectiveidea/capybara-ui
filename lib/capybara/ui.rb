@@ -1,5 +1,5 @@
 require "capybara"
-require "capybara/ui/dsl"
+require "capybara/ui/session"
 require "capybara/ui/reload"
 require "capybara/ui/drivers/rack_test"
 require "capybara/ui/drivers/poltergeist"
@@ -42,5 +42,3 @@ module Capybara
     end
   end
 end
-
-Capybara::Session.send(:include, Capybara::UI::DSL)
