@@ -41,5 +41,9 @@ module Capybara
     def initialize(page)
       @page = page
     end
+
+    def reload
+      page.reload_ui
+    end
   end
 end
