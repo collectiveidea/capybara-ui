@@ -53,7 +53,7 @@ feature "Capybara" do
   end
 
   scenario "UI can load plural associations" do
-    visit "/table.html"
+    visit "/people.html"
 
     ui_people = ui.people
     expect(ui_people).to have(4).people
