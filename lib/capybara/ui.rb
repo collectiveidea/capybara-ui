@@ -44,6 +44,7 @@ module Capybara
 
     def reload
       page.reload_ui
+      page.ui
     end
   end
 end
