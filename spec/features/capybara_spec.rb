@@ -62,4 +62,15 @@ feature "Capybara" do
     expect(ui_people[2].name).to eq("Chris Gaffney")
     expect(ui_people[3].name).to eq("Steve Richert")
   end
+
+  scenario "UI can load singular associations" do
+    visit "/login.html"
+
+    ui_form = ui.form
+    ui_form.email = "foo@bar.com"
+    ui_form.password = "secret"
+
+    expect(ui_form.email).to eq("foo@bar.com")
+    expect(ui_form.password).to eq("secret")
+  end
 end

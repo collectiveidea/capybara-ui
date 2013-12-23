@@ -48,18 +48,33 @@ module Capybara
     end
 
     def self.has_many(name, options = {})
-      klass = options[:class] ||= const_get(options[:class_name])
-      selector ||= klass.selector
+      options[:type] = :many
+
+      association(name, options)
 
       define_method(name) do
-        page.all(selector).map { |node| klass.new(node) }
+        page.all(options[:class].selector).map { |node| options[:class].new(node) }
       end
-
-      plural_associations[name] = options
     end
 
-    def self.plural_associations
-      @plural_associations ||= {}
+    def self.has_one(name, options = {})
+      options[:type] = :one
+
+      association(name, options)
+
+      define_method(name) do
+        options[:class].new(page.find(options[:class].selector))
+      end
+    end
+
+    def self.association(name, options = {})
+      options[:class] ||= const_get(options.delete(:class_name))
+
+      associations[name] = options
+    end
+
+    def self.associations
+      @associations ||= {}
     end
 
     def initialize(page)
