@@ -1,3 +1,6 @@
+require "coveralls"
+Coveralls.wear!
+
 ENV["DRIVER"] ||= "rack_test"
 
 require "capybara/ui"
