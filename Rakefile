@@ -1,5 +1,6 @@
 require "bundler/gem_tasks"
 require "rspec/core/rake_task"
+require "coveralls/rake/task"
 
 DRIVERS = %w(rack_test poltergeist)
 
@@ -13,4 +14,6 @@ end
 desc "Run RSpec code examples for all drivers"
 task spec: DRIVERS
 
-task default: :spec
+Coveralls::RakeTask.new
+
+task default: [:spec, "coveralls:push"]
