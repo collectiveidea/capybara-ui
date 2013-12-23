@@ -1,5 +1,6 @@
 require "capybara"
 require "capybara/ui/session"
+require "capybara/ui/dsl"
 require "capybara/ui/reload"
 require "capybara/ui/drivers/rack_test"
 require "capybara/ui/drivers/poltergeist"
