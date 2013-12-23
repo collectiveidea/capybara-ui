@@ -1,3 +1,5 @@
+require "support/ui/person_row"
+
 class TablePage < Capybara::UI
   path /table/
 

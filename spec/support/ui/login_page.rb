@@ -1,3 +1,5 @@
+require "support/ui/login_form"
+
 class LoginPage < Capybara::UI
   path /login/
 
