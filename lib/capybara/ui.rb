@@ -35,7 +35,7 @@ module Capybara
     end
 
     def self.subclass_for_page(page)
-      subclasses.detect { |s| s.matches?(page) } || (raise NoMatch)
+      subclasses.detect { |s| s.matches?(page) } || (raise NoMatch.new(%(No Capybara::UI class defined for path "#{page.current_path}")))
     end
 
     def self.find_session(&block)
