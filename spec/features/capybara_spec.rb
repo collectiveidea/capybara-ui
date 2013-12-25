@@ -47,4 +47,12 @@ feature "Capybara" do
 
     expect(ui.class).to eq(FooPage)
   end
+
+  scenario "Visiting a page that doesn't have a Capybara-ui matcher" do
+    page.reset!
+
+    visit "/baz.html"
+    expect{ ui }.to raise_error(Capybara::UI::NoMatch, %(No Capybara::UI class defined for path "/baz.html"))
+  end
 end
+
