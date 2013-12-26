@@ -1,5 +1,5 @@
 module Capybara
-  class UI
+  module UI
     module Session
       def self.included(base)
         base.class_eval do
@@ -9,7 +9,7 @@ module Capybara
       end
 
       def ui
-        @ui ||= Capybara::UI.for_page(self)
+        @ui ||= Capybara::UI::Page.for(self)
       end
 
       def reload_ui

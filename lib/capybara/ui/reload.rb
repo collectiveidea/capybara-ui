@@ -1,5 +1,5 @@
 module Capybara
-  class UI
+  module UI
     module Reload
       def self.included(base)
         base.extend(ClassMethods)
