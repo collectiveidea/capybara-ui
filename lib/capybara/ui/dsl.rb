@@ -1,5 +1,5 @@
 module Capybara
-  class UI
+  module UI
     module DSL
       def ui
         page.ui

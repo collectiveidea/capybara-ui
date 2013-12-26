@@ -1,4 +1,4 @@
-class FooPage < Capybara::UI
+class FooPage < Capybara::UI::Page
   path /foo/
 
   def click_bar

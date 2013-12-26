@@ -1,4 +1,4 @@
-class BarPage < Capybara::UI
+class BarPage < Capybara::UI::Page
   def self.matches?(page)
     page.current_path =~ /bar/
   end

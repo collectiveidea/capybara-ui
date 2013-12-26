@@ -4,7 +4,7 @@ begin
 rescue LoadError
 else
   module Capybara
-    class UI
+    module UI
       module Poltergeist
         class Listener
           RELOAD_PATTERN = /\Acapybara-ui reload\s*\z/
